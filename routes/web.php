@@ -23,6 +23,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/users', [UsersController::class, 'index'])->name('users.index');
-Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts.index');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+    Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts.index');
+});
