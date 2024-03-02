@@ -12,7 +12,9 @@ class PaybillsController extends Controller
 {
     public function index(PaybillsDataTable $dataTable)
     {
-        return $dataTable->render('paybills.index');
+        // return $dataTable->render('paybills.index');
+        $paybills = Paybill::all();
+        return view('paybills.paybillList', ['paybills' => $paybills]);
     }
     public function generateAccessToken($consumer_key, $consumer_secret)
     {
