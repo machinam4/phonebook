@@ -22,7 +22,7 @@ class ContactsDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'contacts.action')
+            // ->addColumn('action', 'contacts.action')
             ->setRowId('id');
     }
 
@@ -62,11 +62,11 @@ class ContactsDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+            // Column::computed('action')
+            //     ->exportable(false)
+            //     ->printable(false)
+            //     ->width(60)
+            //     ->addClass('text-center'),
             Column::make('phone_number'),
             Column::make('names'),
             Column::make('first_name'),

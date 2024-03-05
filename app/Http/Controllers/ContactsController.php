@@ -15,9 +15,10 @@ class ContactsController extends Controller
     public function index(ContactsDataTable $dataTable)
     {
         // return $dataTable->render('contacts.index');
+        return $dataTable->render('contacts.contactList');
         // $contacts = Contact::all()->paginate(100);
-        $contacts = Contact::latest()->take(100)->get();
-        return view('contacts.contactList', ['contacts' => $contacts]);
+        // $contacts = Contact::latest()->take(100)->get();
+        // return view('contacts.contactList', ['contacts' => $contacts]);
     }
 
 

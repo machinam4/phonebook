@@ -19,7 +19,7 @@
 
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind2.css') }}">
-
+    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
     @yield('page-css')
 </head>
 
@@ -281,6 +281,7 @@
     <script src="{{ asset('assets/js/tailwick.bundle.js') }}"></script>
 
     @yield('page-scripts')
+    @stack('scripts')
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
 
