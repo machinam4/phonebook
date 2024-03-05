@@ -25,8 +25,14 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/users', [UsersController::class, 'index'])->name('users.index');
-    Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts.index');
-    Route::prefix('/paybills')->controller(PaybillsController::class)->group(function () {
-        Route::get('/', 'index')->name('paybills.index');
+    Route::prefix('/contacts')->controller(ContactsController::class)->name('contacts.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        // Route::Post('/', 'store')->name('add');
+    });
+    Route::prefix('/paybills')->controller(PaybillsController::class)->name('paybills.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::Post('/', 'store')->name('add');
+        Route::put('/{paybill}', 'update')->name('update');
+        Route::Delete('/{paybill}', 'destroy')->name('delete');
     });
 });

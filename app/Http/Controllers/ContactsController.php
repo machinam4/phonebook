@@ -14,7 +14,9 @@ class ContactsController extends Controller
 {
     public function index(ContactsDataTable $dataTable)
     {
-        return $dataTable->render('contacts.index');
+        // return $dataTable->render('contacts.index');
+        $contacts = Contact::all();
+        return view('contacts.contactList', ['contacts' => $contacts]);
     }
 
 

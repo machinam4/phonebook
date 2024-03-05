@@ -16,6 +16,39 @@ class PaybillsController extends Controller
         $paybills = Paybill::all();
         return view('paybills.paybillList', ['paybills' => $paybills]);
     }
+
+    public function store(Request $request)
+    {
+        $data = [
+            'name' => $request->orgname,
+            'radio' => "radio",
+            'shortcode' => $request->shortcode,
+            'initiator' => $request->initiator,
+            'SecurityCredential' => $request->SecurityCredential,
+            'key' => $request->key,
+            'secret' => $request->secret,
+            'passkey' => $request->passkey,
+        ];
+        Paybill::Create($data);
+        return redirect()->route('paybills.index')->with('success', 'Paybill created successfully.');
+    }
+
+    public function update(Request $request, Paybill $paybill)
+    {
+        $paybill->update($request->all());
+        return redirect()->route('paybills.index')->with('success', 'Paybill updated successfully.');
+    }
+
+    // Remove the specified resource from storage.
+    public function destroy(Paybill $paybill)
+    {
+        $paybill->delete();
+        return redirect()->route('paybills.index')->with('success', 'Paybill deleted successfully');
+    }
+
+
+
+
     public function generateAccessToken($consumer_key, $consumer_secret)
     {
         // *** Authorization Request in PHP ***|
