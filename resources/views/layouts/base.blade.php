@@ -191,9 +191,18 @@
                                     </a>
                                     <ul>
                                         <li class="pt-2 mt-2 border-t border-slate-200 dark:border-zink-500">
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                style="display: none;">
+                                                @csrf
+                                            </form>
+
                                             <a class="block ltr:pr-4 rtl:pl-4 py-1.5 text-base font-medium transition-all duration-200 ease-linear text-slate-600 dropdown-item hover:text-custom-500 focus:text-custom-500 dark:text-zink-200 dark:hover:text-custom-500 dark:focus:text-custom-500"
-                                                href="auth-logout-basic.html"><i data-lucide="log-out"
-                                                    class="inline-block size-4 ltr:mr-2 rtl:ml-2"></i> Sign Out</a>
+                                                href="javascript:void(0);"
+                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <i data-lucide="log-out"
+                                                    class="inline-block size-4 ltr:mr-2 rtl:ml-2"></i> Sign Out
+                                            </a>
+
                                         </li>
                                     </ul>
                                 </div>
