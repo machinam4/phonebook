@@ -43,8 +43,8 @@ class ContactsDataTable extends DataTable
             ->setTableId('contacts-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            //->dom('Bfrtip')
-            ->orderBy(1)
+            // ->dom('Bfrtip')
+            ->orderBy(6)
             ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
