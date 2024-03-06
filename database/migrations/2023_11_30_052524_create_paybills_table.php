@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('radio');
             $table->string("shortcode");
             $table->string('initiator');
-            $table->string('SecurityCredential');
+            $table->text('SecurityCredential');
             $table->string('key');
             $table->string('secret');
             $table->string('passkey')->nullable();
