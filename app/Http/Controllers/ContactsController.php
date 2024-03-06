@@ -27,13 +27,18 @@ class ContactsController extends Controller
     {
         // Extract DebitPartyName from the callback data
         // Log::info("requets back");
-        Log::error($request);
+        // Log::error($request);
+        if ($request->json('Result.ResultCode') == 2001) {
+            Log::info($request);
+            return 'failed';
+        }
         $debitPartyName = $request->json('Result.ResultParameters.ResultParameter.0.Value');
 
 
         $creditPartyName = $request->json('Result.ResultParameters.ResultParameter.1.Value');
 
-        Log::info($creditPartyName);
+        // Log::info($creditPartyName);
+
 
         list($BusinessShortCode, $BusinessName) = explode(' - ', $creditPartyName);
         $paybill = Paybill::where("shortcode", $BusinessShortCode)->first();
@@ -49,7 +54,7 @@ class ContactsController extends Controller
         $middlename = (count($names) > 2) ? $names[1] : null;
         $lastname = end($names);
         // list($firstname, $middlename, $lastname) = explode('   ', $names);
-        Log::info([$firstname, $middlename, $lastname]);
+        // Log::info([$firstname, $middlename, $lastname]);
 
         // Log::info([
         //     'phone_number' => $phoneNumber,
