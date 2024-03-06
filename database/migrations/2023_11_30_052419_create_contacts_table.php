@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('paybill_id');
             $table->string('shortcode');
             $table->timestamps();
-            $table->unique(['phone', 'shortcode']);
+            $table->unique(['phone_number', 'shortcode']);
         });
     }
 
