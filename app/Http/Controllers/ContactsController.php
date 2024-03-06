@@ -27,7 +27,7 @@ class ContactsController extends Controller
     {
         // Extract DebitPartyName from the callback data
         // Log::info("requets back");
-        // Log::info($request);
+        Log::error($request);
         $debitPartyName = $request->json('Result.ResultParameters.ResultParameter.0.Value');
 
 
