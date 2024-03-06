@@ -7,6 +7,7 @@ use App\Models\Paybill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Psy\Readline\Hoa\Console;
 
 class PaybillsController extends Controller
 {
@@ -93,8 +94,8 @@ class PaybillsController extends Controller
                 "TransactionID" => $request->TransID,
                 "PartyA" => $request->BusinessShortCode,
                 "IdentifierType" => "4",
-                "ResultURL" => "https://0193-102-219-209-70.ngrok-free.app/api/v3/handleCallback",
-                "QueueTimeOutURL" => "https://0193-102-219-209-70.ngrok-free.app/api/v3/handleCallback",
+                "ResultURL" => url('') . "/api/v3/handleCallback",
+                "QueueTimeOutURL" => url('') . "/api/v3/handleCallback",
                 "Remarks" => "Verify user transaction",
                 "Occasion" => "verification",
             ]);
