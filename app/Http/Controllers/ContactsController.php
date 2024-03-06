@@ -26,21 +26,22 @@ class ContactsController extends Controller
     public function handleCallback(Request $request)
     {
         // Extract DebitPartyName from the callback data
-        Log::info("requets back");
+        // Log::info("requets back");
         // Log::info($request);
         $debitPartyName = $request->json('Result.ResultParameters.ResultParameter.0.Value');
 
 
         $creditPartyName = $request->json('Result.ResultParameters.ResultParameter.1.Value');
 
+        Log::info($creditPartyName);
+
         list($BusinessShortCode, $BusinessName) = explode(' - ', $creditPartyName);
         $paybill = Paybill::where("shortcode", $BusinessShortCode)->first();
 
 
-        Log::info("names");
+        // Log::info("names");
         // Split DebitPartyName into phone number and name
         list($phoneNumber, $fullName) = explode(' - ', $debitPartyName);
-
         // Split names into three names
         // Split full name into first, middle, and last names
         $names = explode(' ', $fullName);
@@ -50,26 +51,31 @@ class ContactsController extends Controller
         // list($firstname, $middlename, $lastname) = explode('   ', $names);
         Log::info([$firstname, $middlename, $lastname]);
 
-        Log::info([
-            'phone_number' => $phoneNumber,
-            'names' => $fullName,
-            'first_name' => $firstname,
-            'middle_name' => $middlename,
-            'last_name' => $lastname,
-            'paybill_id' => $paybill->id,
-            'shortcode' => $BusinessShortCode
-        ]);
+        // Log::info([
+        //     'phone_number' => $phoneNumber,
+        //     'names' => $fullName,
+        //     'first_name' => $firstname,
+        //     'middle_name' => $middlename,
+        //     'last_name' => $lastname,
+        //     'paybill_id' => $paybill->id,
+        //     'shortcode' => $BusinessShortCode
+        // ]);
+        try {
+            // Store the data in the database
+            Contact::create([
+                'phone_number' => $phoneNumber,
+                'names' => $fullName,
+                'first_name' => $firstname,
+                'middle_name' => $middlename,
+                'last_name' => $lastname,
+                'paybill_id' => $paybill->id,
+                'shortcode' => $BusinessShortCode
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Contact exists']);
+            throw $th;
+        }
 
-        // Store the data in the database
-        Contact::create([
-            'phone_number' => $phoneNumber,
-            'names' => $fullName,
-            'first_name' => $firstname,
-            'middle_name' => $middlename,
-            'last_name' => $lastname,
-            'paybill_id' => $paybill->id,
-            'shortcode' => $BusinessShortCode
-        ]);
 
         return response()->json(['message' => 'Data stored successfully']);
     }
