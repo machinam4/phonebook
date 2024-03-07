@@ -35,7 +35,7 @@ class UsersController extends Controller
 
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-            'phone_number' => ['required', 'string', 'max:255'],
+            'phone_number' => ['required', 'string', 'max:255', Rule::unique(User::class),],
             'role' => ['required', 'string', 'max:255'],
             'status' => ['required', 'string', 'max:255'],
             'username' => [
@@ -74,7 +74,24 @@ class UsersController extends Controller
     }
     function update(Request $request, User $user)
     {
-        $user->update($request->all());
+        $input = $request->all();
+        Validator::make($input, [
+            'phone_number' => ['required', 'string', 'max:255', Rule::unique(User::class),],
+            'username' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique(User::class),
+            ],
+            'email' => [
+                'required',
+                'email',
+                'string',
+                'max:255',
+                Rule::unique(User::class),
+            ],
+        ])->validate();
+        $user->update($input);
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 }
