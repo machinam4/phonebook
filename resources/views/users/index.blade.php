@@ -45,7 +45,12 @@
 
                             <td
                                 class="px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right">
-                                {{ $user->channel->name }}</td>
+                                @if ($user->role == 1)
+                                    {{ __('Admin') }}
+                                @else
+                                    {{ $user->channel->name }}
+                                @endif
+                            </td>
                             <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 status"><span
                                     class="px-2.5 py-0.5 inline-block text-xs font-medium rounded border bg-green-100 border-transparent text-green-500 dark:bg-green-500/20 dark:border-transparent text-uppercase">Active</span>
                             </td>
