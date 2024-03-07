@@ -8,22 +8,23 @@
     <div class="card">
         <div class="card-body">
             <h6 class="mb-4 text-15">Filter Records</h6>
-            <form action="" method="post">
+            <form action="{{ route('contacts.filter') }}" method="post">
+                @csrf
                 <div class="grid grid-cols-1 gap-3 mb-5 lg:grid-cols-3 items-end">
                     <div>
                         <label for="min" class="inline-block mb-2 text-base font-medium">Start Date:</label>
                         <input type="date" id="from-date"
                             class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                            placeholder="Select Date" required>
+                            placeholder="Select Date" name="from_date" value="{{ $fromDate }}" required>
                     </div>
                     <div>
-                        <label for="min" class="inline-block mb-2 text-base font-medium">Start Date:</label>
+                        <label for="min" class="inline-block mb-2 text-base font-medium">End Date:</label>
                         <input type="date" id="to-date"
                             class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                            placeholder="Select Date" required>
+                            placeholder="Select Date" name="to_date" value="{{ $toDate }}" required>
                     </div>
                     <div>
-                        <button type="button"
+                        <button type="submit"
                             class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 add-btn"><i
                                 class="align-bottom ri-filter-2-fill me-1"></i>Filter</button>
                     </div>
@@ -106,6 +107,7 @@
     <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
     <script>
         var table = $('#contacts_table').DataTable({
+            ordering: false,
             dom: 'Brtip',
             buttons: [
                 'copyHtml5',
@@ -126,14 +128,14 @@
                     toDate.set('minDate', selectedDates[0]);
                 }
             },
-            defaultDate: 'today',
+            // defaultDate: 'today',
         });
         // Initialize the #to-date Flatpickr without setting the minDate initially
         const toDate = flatpickr("#to-date", {
             enableTime: true,
             maxDate: "today",
             dateFormat: "Y-m-d H:i",
-            defaultDate: 'today',
+            // defaultDate: 'today',
         });
     </script>
 

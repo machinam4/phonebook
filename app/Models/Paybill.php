@@ -4,14 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Yajra\DataTables\Html\Editor\Fields\Radio;
 
 class Paybill extends Model
 {
     use HasFactory;
     protected $fillable = [
         "name",
-        "radio",
+        "radio", //replaced by channel
         "shortcode",
         "initiator",
         "SecurityCredential",
@@ -20,8 +19,8 @@ class Paybill extends Model
         "passkey",
     ];
 
-    public function radio()
+    public function channel()
     {
-        return $this->belongsTo(Radio::class, 'radio', 'id');
+        return $this->hasOne(Channels::class, 'radio', 'id');
     }
 }

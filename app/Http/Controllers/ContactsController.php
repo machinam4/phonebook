@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\ContactsDataTable;
 use App\Models\Contact;
 use App\Models\Paybill;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -12,17 +13,34 @@ use Psy\Readline\Hoa\Console;
 
 class ContactsController extends Controller
 {
-    public function index(ContactsDataTable $dataTable)
+    public function index()
     {
-        // return $dataTable->render('contacts.index');
-        // return $dataTable->render('contacts.contactList');
-        // $contacts = Contact::all()->paginate(100);
-        $contacts = Contact::latest()->take(100)->get();
-        return view('contacts.contactList', ['contacts' => $contacts]);
+        $from_date = Carbon::today();
+        $to_date = Carbon::now()->endOfDay();
+        if (auth()->user()->role == 1) { //if Admin return all records
+            $contacts = Contact::where('created_at', '>=', $from_date)->orderBy('id', 'desc')->get();
+        } else {
+
+            $contacts = auth()->user()->channel->contacts()->where('created_at', '>=', $from_date)->orderBy('id', 'desc')->get();
+        }
+
+
+        return view('contacts.contactList', ['contacts' => $contacts, "fromDate" => $from_date, "toDate" => $to_date]);
+    }
+
+    public function filter(Request $request)
+    {
+
+        $from_date = Carbon::parse($request->from_date);
+        $to_date = Carbon::parse($request->to_date);
+        // dd($from_date);
+        $contacts = auth()->user()->channel->contacts()->where('created_at', '>=', $from_date)->where('created_at', '<=', $to_date)->orderBy('id', 'desc')->get();
+        return view('contacts.contactList', ['contacts' => $contacts,  "fromDate" => $from_date, "toDate" => $to_date]);
     }
 
 
 
+    //api functions starts here
     public function handleCallback(Request $request)
     {
         // Extract DebitPartyName from the callback data
@@ -78,7 +96,7 @@ class ContactsController extends Controller
             ]);
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Contact exists']);
-            throw $th;
+            // throw $th;
         }
 
 

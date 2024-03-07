@@ -1,5 +1,5 @@
 @extends('layouts.base')
-@section('page-title', 'Users')
+@section('page-title', 'Channels')
 @section('page-css')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables/buttons.dataTables.css') }}">
 @endsection
@@ -10,49 +10,36 @@
             <!-- <h6 class="mb-4 text-15">U/sers</h6> -->
             <div class="grid grid-cols-1 gap-5 mb-5 xl:grid-cols-2">
                 <div>
-                    <a type="button" href="{{ route('users.add') }}"
+                    <a type="button" href="{{ route('channels.add') }}"
                         class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 add-btn"><i
-                            class="align-bottom ri-add-line me-1"></i> Add User</a>
+                            class="align-bottom ri-add-line me-1"></i> Add Radio Channel</a>
                 </div>
             </div>
-            <table id="users_table" class="display stripe group" style="width:100%">
+            <table id="channels_table" class="display stripe group" style="width:100%">
                 <thead>
                     <tr>
-                        <th class="ltr:!text-left rtl:!text-right">Phone Number</th>
-                        <th>Full Names</th>
-                        <th>Username</th>
-                        <th>E-mail</th>
-                        <th>Radio Role</th>
-                        <th>Status</th>
+                        <th class="ltr:!text-left rtl:!text-right">Channel Name</th>
+                        <th>Shortcode</th>
+                        <th>Created By</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
+                    @foreach ($channels as $channel)
                         <tr>
                             <td
                                 class="px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right">
-                                {{ $user->phone_number }}</td>
+                                {{ $channel->name }}</td>
                             <td
                                 class="px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right">
-                                {{ $user->name }}</td>
+                                {{ $channel->paybill->shortcode }}</td>
                             <td
                                 class="px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right">
-                                {{ $user->username }}</td>
-                            <td
-                                class="px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right">
-                                {{ $user->email }}</td>
-
-                            <td
-                                class="px-3.5 py-2.5 font-semibold border-b border-slate-200 dark:border-zink-500 ltr:text-left rtl:text-right">
-                                {{ $user->role }}</td>
-                            <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500 status"><span
-                                    class="px-2.5 py-0.5 inline-block text-xs font-medium rounded border bg-green-100 border-transparent text-green-500 dark:bg-green-500/20 dark:border-transparent text-uppercase">Active</span>
-                            </td>
+                                {{ $channel->createdby->name }}</td>
                             <td class="px-3.5 py-2.5 border-y border-slate-200 dark:border-zink-500">
                                 <div class="flex gap-2">
                                     <div class="edit">
-                                        <a href="{{ route('users.edit', $user) }}"
+                                        <a href="{{ route('channels.edit', $channel) }}"
                                             class="edit-item-btn py-1 text-xs text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 edit-item-btn">Edit</a>
 
                                     </div>
@@ -68,7 +55,6 @@
             </table>
         </div>
     </div><!--end card-->
-
     <div id="deleteRecordModal" modal-center
         class="fixed flex flex-col hidden transition-all duration-300 ease-in-out left-2/4 z-drawer -translate-x-2/4 -translate-y-2/4 show">
         <div class="w-screen md:w-[25rem] bg-white shadow rounded-md dark:bg-zink-600">
@@ -110,7 +96,7 @@
     <script src="{{ asset('assets/js/datatables/vfs_fonts.js') }}"></script>
 
     <script>
-        var table = $('#users_table').DataTable({
+        var table = $('#channels_table').DataTable({
             // dom: 'lBfrtip',
             // dom: 'lBfrtip', // This needs to be defined to tell DataTables where to display the buttons
             // buttons: [
