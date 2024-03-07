@@ -33,31 +33,26 @@ class UsersController extends Controller
     {
         $input = $request->all();
 
-        try {
-            Validator::make($input, [
-                'name' => ['required', 'string', 'max:255'],
-                'phone_number' => ['required', 'string', 'max:255'],
-                'role' => ['required', 'string', 'max:255'],
-                'status' => ['required', 'string', 'max:255'],
-                'username' => [
-                    'required',
-                    'string',
-                    'max:255',
-                    Rule::unique(User::class),
-                ],
-                'email' => [
-                    'required',
-                    'email',
-                    'string',
-                    'max:255',
-                    Rule::unique(User::class),
-                ],
-                'password' => $this->passwordRules(),
-            ])->validate();
-        } catch (\Throwable $th) {
-            dd($th);
-            throw $th;
-        }
+        Validator::make($input, [
+            'name' => ['required', 'string', 'max:255'],
+            'phone_number' => ['required', 'string', 'max:255'],
+            'role' => ['required', 'string', 'max:255'],
+            'status' => ['required', 'string', 'max:255'],
+            'username' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique(User::class),
+            ],
+            'email' => [
+                'required',
+                'email',
+                'string',
+                'max:255',
+                Rule::unique(User::class),
+            ],
+            'password' => $this->passwordRules(),
+        ])->validate();
 
         User::create([
             'name' => $input['name'],
