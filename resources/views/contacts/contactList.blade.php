@@ -133,7 +133,7 @@
         // Initialize the #to-date Flatpickr without setting the minDate initially
         const toDate = flatpickr("#to-date", {
             enableTime: true,
-            maxDate: "today",
+            // maxDate: @json($toDate),
             dateFormat: "Y-m-d H:i",
             // defaultDate: 'today',
         });
