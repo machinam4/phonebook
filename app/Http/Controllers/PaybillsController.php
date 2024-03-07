@@ -66,7 +66,7 @@ class PaybillsController extends Controller
         );
         $response = json_decode(curl_exec($ch));
         curl_close($ch);
-        Log::info($response->access_token);
+        // Log::info($response->access_token);
         return $response->access_token;
     }
 
