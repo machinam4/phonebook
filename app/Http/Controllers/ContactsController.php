@@ -33,8 +33,11 @@ class ContactsController extends Controller
 
         $from_date = Carbon::parse($request->from_date);
         $to_date = Carbon::parse($request->to_date);
-        // dd($from_date);
-        $contacts = auth()->user()->channel->contacts()->where('created_at', '>=', $from_date)->where('created_at', '<=', $to_date)->orderBy('id', 'desc')->get();
+        if (auth()->user()->role == 1) { //if Admin return all records
+            $contacts = Contact::where('created_at', '>=', $from_date)->where('created_at', '<=', $to_date)->orderBy('id', 'desc')->get();
+        } else {
+            $contacts = auth()->user()->channel->contacts()->where('created_at', '>=', $from_date)->where('created_at', '<=', $to_date)->orderBy('id', 'desc')->get();
+        }
         return view('contacts.contactList', ['contacts' => $contacts,  "fromDate" => $from_date, "toDate" => $to_date]);
     }
 
