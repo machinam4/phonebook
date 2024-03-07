@@ -15,11 +15,26 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('username')->unique();
+            $table->string('phone_number')->unique();
+            $table->string('role');
+            $table->string('email');
+            $table->string('status')->default('Active');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
+
+        DB::table('users')->insert(
+            array(
+                'name' => 'Machina Maiki',
+                'username' => 'machina',
+                'phone_number'=> '254758309015',
+                'email'=> 'machinamaiki@gmail.com',
+                'role' => 'admin',
+                'password' => Hash::make('dial@Deck12'),
+            )
+        );
     }
 
     /**

@@ -24,7 +24,10 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+    Route::prefix('/users')->controller(UsersController::class)->name('users.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::Post('/', 'store')->name('add');
+    });
     Route::prefix('/contacts')->controller(ContactsController::class)->name('contacts.')->group(function () {
         Route::get('/', 'index')->name('index');
         // Route::Post('/', 'store')->name('add');
