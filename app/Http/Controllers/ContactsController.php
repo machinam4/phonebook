@@ -47,8 +47,9 @@ class ContactsController extends Controller
     public function handleCallback(Request $request)
     {
         // Extract DebitPartyName from the callback data
-        Log::info("requets back");
-        Log::error($request);
+        // Log::info("requets back");
+        // Log::error($request);
+
         if ($request->json('Result.ResultCode') == 2001) {
             // Log::info($request);
             return 'failed';
@@ -62,6 +63,10 @@ class ContactsController extends Controller
 
 
         list($BusinessShortCode, $BusinessName) = explode(' - ', $creditPartyName);
+        if ($BusinessShortCode == "6270766") {
+            Log::info("requets back");
+            Log::error($request);
+        }
         $paybill = Paybill::where("shortcode", $BusinessShortCode)->first();
 
 
