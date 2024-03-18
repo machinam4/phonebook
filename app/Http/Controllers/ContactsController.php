@@ -50,8 +50,8 @@ class ContactsController extends Controller
         // Log::info("requets back");
         // Log::error($request);
 
-        if ($request->json('Result.ResultCode') == 2001) {
-            // Log::info($request);
+        if ($request->json('Result.ResultCode') != 0) {
+            Log::info($request);
             return 'failed';
         }
         $debitPartyName = $request->json('Result.ResultParameters.ResultParameter.0.Value');
