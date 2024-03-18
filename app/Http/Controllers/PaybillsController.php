@@ -66,7 +66,7 @@ class PaybillsController extends Controller
         );
         $response = json_decode(curl_exec($ch));
         curl_close($ch);
-        // Log::info($response->access_token);
+        response()->json($response->access_token);
         return $response->access_token;
     }
 
@@ -81,7 +81,7 @@ class PaybillsController extends Controller
         if (!$paybill) {
             return response()->json(['message' => 'Paybill not in db']);
         }
-        // Log::alert($paybill->key);
+        response()->json("key", $paybill->key);
         // Send the result data to the specified ResultURL
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->generateAccessToken($paybill->key, $paybill->secret),
