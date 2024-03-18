@@ -48,7 +48,7 @@ class ContactsController extends Controller
     {
         // Extract DebitPartyName from the callback data
         // Log::info("requets back");
-        // Log::error($request);
+        Log::error($request);
 
         if ($request->json('Result.ResultCode') == 2001) {
             // Log::info($request);
