@@ -39,7 +39,7 @@
                             alt="" class="h-6 mx-auto">
                     </span>
                     <span class="group-data-[sidebar-size=sm]:hidden">
-                        <img src="assets/images/logo-dark.png" alt="" class="h-6 mx-auto">
+                        <img src="assets/images/phonebook_logo.png" alt="" class="h-6 mx-auto">
                     </span>
                 </a>
                 <a href="index.html"
@@ -49,7 +49,7 @@
                             alt="" class="h-6 mx-auto">
                     </span>
                     <span class="group-data-[sidebar-size=sm]:hidden">
-                        <img src="assets/images/logo-light.png" alt="" class="h-6 mx-auto">
+                        <img src="assets/images/phonebook_logo.png" alt="" class="h-6 mx-auto">
                     </span>
                 </a>
                 <button type="button" class="hidden p-0 float-end" id="vertical-hover">
@@ -156,7 +156,7 @@
                                         alt="" class="h-6 mx-auto">
                                 </span>
                                 <span class="group-data-[topbar=dark]:hidden group-data-[topbar=brand]:hidden">
-                                    <img src="assets/images/logo-dark.png" alt="" class="h-6 mx-auto">
+                                    <img src="assets/images/phonebook_logo.png" alt="" class="h-6 mx-auto">
                                 </span>
                             </a>
                             <a href="index.html"
@@ -166,7 +166,7 @@
                                         alt="" class="h-6 mx-auto">
                                 </span>
                                 <span class="group-data-[topbar=dark]:block group-data-[topbar=brand]:block">
-                                    <img src="assets/images/logo-light.png" alt="" class="h-6 mx-auto">
+                                    <img src="assets/images/phonebook_logo.png" alt="" class="h-6 mx-auto">
                                 </span>
                             </a>
                         </div>
