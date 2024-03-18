@@ -81,7 +81,7 @@ class PaybillsController extends Controller
         if (!$paybill) {
             return response()->json(['message' => 'Paybill not in db']);
         }
-        Log::alert("key", $paybill->key);
+        Log::alert(["key", $paybill->key]);
         // Send the result data to the specified ResultURL
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->generateAccessToken($paybill->key, $paybill->secret),
