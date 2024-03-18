@@ -51,7 +51,7 @@ class ContactsController extends Controller
         // Log::error($request);
 
         if ($request->json('Result.ResultCode') != 0) {
-            Log::info($request);
+            // Log::info($request);
             return 'failed';
         }
         $debitPartyName = $request->json('Result.ResultParameters.ResultParameter.0.Value');
@@ -63,10 +63,12 @@ class ContactsController extends Controller
 
 
         list($BusinessShortCode, $BusinessName) = explode(' - ', $creditPartyName);
-        // if ($BusinessShortCode == "6270766") {
-        //     Log::info("requets back");
-        //     Log::error($request);
-        // }
+
+        //CURRENT TEMPORARY FIX FOR HO ERROR
+        if ($BusinessShortCode == "6270767") {
+            $BusinessShortCode = "6270766";
+            Log::error($request);
+        }
         $paybill = Paybill::where("shortcode", $BusinessShortCode)->first();
 
 
