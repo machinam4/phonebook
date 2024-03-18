@@ -72,17 +72,19 @@ class PaybillsController extends Controller
 
     public function transQuery(Request $request)
     {
-        $paybill = Paybill::where("shortcode", $request->BusinessShortCode)->first();
 
+        $paybill = Paybill::where("shortcode", $request->BusinessShortCode)->first();
         // Log::info($paybill);
 
-
-
         if (!$paybill) {
+            //6270767 temporary fix
             return response()->json(['message' => 'Paybill not in db']);
         }
-        if ($request->BusinessShortCode == "6270766") {
-            Log::alert(["key", $paybill->key]);
+        $BusinessShortCode = $request->BusinessShortCode;
+
+        if ($BusinessShortCode == "6270767") {
+            $BusinessShortCode = "6270766";
+            // Log::alert(["key", $paybill->key]);
         }
         // Send the result data to the specified ResultURL
         $response = Http::withHeaders([
@@ -94,7 +96,7 @@ class PaybillsController extends Controller
                 "SecurityCredential" => $paybill->SecurityCredential,
                 "CommandID" => "TransactionStatusQuery",
                 "TransactionID" => $request->TransID,
-                "PartyA" => $request->BusinessShortCode,
+                "PartyA" => $BusinessShortCode,
                 "IdentifierType" => "4",
                 "ResultURL" => url('') . "/api/v3/handleCallback",
                 "QueueTimeOutURL" => url('') . "/api/v3/handleCallback",

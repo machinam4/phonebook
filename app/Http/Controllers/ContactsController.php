@@ -64,11 +64,7 @@ class ContactsController extends Controller
 
         list($BusinessShortCode, $BusinessName) = explode(' - ', $creditPartyName);
 
-        //CURRENT TEMPORARY FIX FOR HO ERROR
-        if ($BusinessShortCode == "6270767") {
-            $BusinessShortCode = "6270766";
-            Log::error($request);
-        }
+
         $paybill = Paybill::where("shortcode", $BusinessShortCode)->first();
 
 
