@@ -47,8 +47,8 @@ class ContactsController extends Controller
     public function handleCallback(Request $request)
     {
         // Extract DebitPartyName from the callback data
-        Log::info("requets back");
-        Log::error($request);
+        // Log::info("requets back");
+        // Log::error($request);
 
         if ($request->json('Result.ResultCode') != 0) {
             // Log::info($request);
