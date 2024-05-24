@@ -83,7 +83,7 @@ class PaybillsController extends Controller
         $BusinessShortCode = $request->BusinessShortCode;
 
         if ($BusinessShortCode == "6270767") {
-            $BusinessShortCode = "6270767";
+            $BusinessShortCode = "6270766";
             Log::alert(["key", $paybill->key]);
         }
         // Send the result data to the specified ResultURL
