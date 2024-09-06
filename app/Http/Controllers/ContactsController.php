@@ -89,7 +89,7 @@ class ContactsController extends Controller
             'TransID' => $TransID
         ]);
 
-        $response = Http::withOptions(['verify' => false])->post('https://ridhishajamii.com/api/player/update', $playerdata);
+        $response = Http::post('https://app.ridhishajamii.com/api/player/update', $playerdata);
         // ========== end update player in ridhishajamii ==============
 
         try {
