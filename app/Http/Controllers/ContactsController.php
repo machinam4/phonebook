@@ -90,7 +90,14 @@ class ContactsController extends Controller
         ]);
 
         $response = Http::post('https://ridhishajamii.com/api/player/update', $playerdata);
-        Log::info("data sent");
+
+        if ($response->successful()) {
+            Log::info("data sent");
+        } else {
+            // Handle failure
+            Log::error('Failed to post data', ['response' => $response->body()]);
+        }
+        
         // ========== end update player in ridhishajamii ==============
 
         try {
