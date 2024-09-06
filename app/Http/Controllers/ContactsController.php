@@ -95,7 +95,7 @@ class ContactsController extends Controller
             Log::info("data sent");
         } else {
             // Handle failure
-            Log::error('Failed to post data', ['response' => $response->body()]);
+            Log::error('Failed to post data', ['response' => $response->status()]);
         }
         
         // ========== end update player in ridhishajamii ==============
