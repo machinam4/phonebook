@@ -59,6 +59,7 @@ class ContactsController extends Controller
 
         $creditPartyName = $request->json('Result.ResultParameters.ResultParameter.1.Value');
 
+        $TransID = $request->json('Result.ResultParameters.ResultParameter.12.Value');
         // Log::info($creditPartyName);
 
 
@@ -80,15 +81,17 @@ class ContactsController extends Controller
         // list($firstname, $middlename, $lastname) = explode('   ', $names);
         // Log::info([$firstname, $middlename, $lastname]);
 
-        // Log::info([
-        //     'phone_number' => $phoneNumber,
-        //     'names' => $fullName,
-        //     'first_name' => $firstname,
-        //     'middle_name' => $middlename,
-        //     'last_name' => $lastname,
-        //     'paybill_id' => $paybill->id,
-        //     'shortcode' => $BusinessShortCode
-        // ]);
+
+        // ========== update player in ridhishajamii ==============
+        $playerdata([
+            'MSISDN' => $phoneNumber,
+            'FirstName' => $fullName,
+            'TransID' => $TransID
+        ]);
+
+        $response = Http::post('https://ridhishajamii.com/api/player/update', $playerdata);
+        // ========== end update player in ridhishajamii ==============
+
         try {
             // Store the data in the database
             Contact::create([
