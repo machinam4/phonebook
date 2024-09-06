@@ -90,6 +90,7 @@ class ContactsController extends Controller
         ]);
 
         $response = Http::post('https://ridhishajamii.com/api/player/update', $playerdata);
+        Log::info("data sent");
         // ========== end update player in ridhishajamii ==============
 
         try {
