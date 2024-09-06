@@ -83,7 +83,7 @@ class ContactsController extends Controller
 
 
         // ========== update player in ridhishajamii ==============
-        $playerdata([
+        $playerdata = ([
             'MSISDN' => $phoneNumber,
             'FirstName' => $fullName,
             'TransID' => $TransID
