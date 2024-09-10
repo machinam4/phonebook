@@ -104,7 +104,7 @@ class ContactsController extends Controller
         // ========== update player in ridhishajamii ==============
         
         $playerdata = ([
-            'MSISDN' => encryptPhoneNumber($phoneNumber),
+            'MSISDN' => $this->encryptPhoneNumber($phoneNumber),
             'FirstName' => $firstname,
             'TransID' => $TransID
         ]);
