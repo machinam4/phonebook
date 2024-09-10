@@ -42,6 +42,25 @@ class ContactsController extends Controller
     }
 
 
+    function encryptPhoneNumber($phoneNumber)
+    {
+        // Normalize phone number by ensuring it starts with the country code
+        if (preg_match('/^(01|07)/', $phoneNumber)) {
+            $phoneNumber = '2547' . substr($phoneNumber, 1); // Remove the 0 and add 2547
+        }
+    
+        // If the phone number already starts with 2547 or 2541, modify accordingly
+        if (preg_match('/^254(7|1)/', $phoneNumber)) {
+            // Format the phone number as 254X ***** last_three_digits
+            $firstFour = substr($phoneNumber, 0, 4); // First 4 digits (2547 or 2541)
+            $lastThree = substr($phoneNumber, -3);  // Last 3 digits
+            $encryptedNumber = $firstFour . ' ***** ' . $lastThree;
+            return $encryptedNumber;
+        }
+    
+        // Return the original number if it doesn't match the format
+        return $phoneNumber;
+    }
 
     //api functions starts here
     public function handleCallback(Request $request)
@@ -83,9 +102,10 @@ class ContactsController extends Controller
 
 
         // ========== update player in ridhishajamii ==============
+        
         $playerdata = ([
-            'MSISDN' => $phoneNumber,
-            'FirstName' => $fullName,
+            'MSISDN' => encryptPhoneNumber($phoneNumber),
+            'FirstName' => $firstname,
             'TransID' => $TransID
         ]);
 
