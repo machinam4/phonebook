@@ -109,8 +109,16 @@ class ContactsController extends Controller
             'TransID' => $TransID
         ]);
 
-        $response = Http::post('https://ridhishajamii.com/api/player/update', $playerdata);
+        if ($paybill->shortcode == '3018585') {
+            $response = Http::post('https://reliablemedialtd.com/api/player/update', $playerdata);
 
+        } else {
+            $response = Http::post('https://ridhishajamii.com/api/player/update', $playerdata);
+
+        }
+        
+
+       
         if ($response->successful()) {
             Log::info("data sent");
         } else {
