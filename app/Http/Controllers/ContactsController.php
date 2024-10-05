@@ -110,6 +110,7 @@ class ContactsController extends Controller
         ]);
 
         if ($paybill->shortcode == '3018585') {
+            Log::info($playerdata);
             $response = Http::post('https://reliablemedialtd.com/api/player/update', $playerdata);
 
         } else {
