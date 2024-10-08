@@ -74,7 +74,7 @@ class PaybillsController extends Controller
     {
 
         $paybill = Paybill::where("shortcode", $request->BusinessShortCode)->first();
-        // Log::info($paybill);
+        Log::info($paybill);
 
         if (!$paybill) {
             //6270767 temporary fix
