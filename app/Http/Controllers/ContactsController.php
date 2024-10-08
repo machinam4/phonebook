@@ -66,7 +66,7 @@ class ContactsController extends Controller
     public function handleCallback(Request $request)
     {
         // Extract DebitPartyName from the callback data
-        // Log::info("requets back");
+        Log::info("requets back");
         // Log::error($request);
 
         if ($request->json('Result.ResultCode') != 0) {
@@ -109,7 +109,7 @@ class ContactsController extends Controller
             'TransID' => $TransID
         ]);
 
-        if ($paybill->shortcode == '3018585') {
+        if ($BusinessShortCode == '3018585') {
             Log::info($playerdata);
             $response = Http::post('https://reliablemedialtd.com/api/player/update', $playerdata);
 
