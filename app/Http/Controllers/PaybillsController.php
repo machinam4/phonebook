@@ -74,7 +74,7 @@ class PaybillsController extends Controller
     {
 
         $paybill = Paybill::where("shortcode", $request->BusinessShortCode)->first();
-        Log::info($paybill->shortcode);
+        // Log::info($paybill->shortcode);
 
         if (!$paybill) {
             //6270767 temporary fix
@@ -107,7 +107,7 @@ class PaybillsController extends Controller
         // Access the response body as an array
         $responseArray = $response->json();
 
-        Log::info($responseArray);
+        // Log::info($responseArray);
 
 
 

@@ -66,7 +66,7 @@ class ContactsController extends Controller
     public function handleCallback(Request $request)
     {
         // Extract DebitPartyName from the callback data
-        Log::info($request);
+        // Log::info($request);
         // Log::error($request);
 
         if ($request->json('Result.ResultCode') != 0) {
@@ -103,17 +103,24 @@ class ContactsController extends Controller
 
         // ========== update player in ridhishajamii ==============
         
-        $playerdata = ([
-            'MSISDN' => $this->encryptPhoneNumber($phoneNumber),
-            'FirstName' => $firstname,
-            'TransID' => $TransID
-        ]);
+       
 
         if ($BusinessShortCode == '3018585') {
-            Log::info($playerdata);
+            $playerdata = ([
+                'MSISDN' => $phoneNumber,
+                'FirstName' => $firstname,
+                'MiddleName' => $middlename,
+                'LastName' => $lastname,
+                'TransID' => $TransID
+            ]);
             $response = Http::post('https://reliablemedialtd.com/api/player/update', $playerdata);
 
         } else {
+            $playerdata = ([
+                'MSISDN' => $this->encryptPhoneNumber($phoneNumber),
+                'FirstName' => $firstname,
+                'TransID' => $TransID
+            ]);
             $response = Http::post('https://ridhishajamii.com/api/player/update', $playerdata);
 
         }
@@ -121,7 +128,7 @@ class ContactsController extends Controller
 
        
         if ($response->successful()) {
-            Log::info("data sent");
+            // Log::info("data sent");
         } else {
             // Handle failure
             Log::error('Failed to post data', ['response' => $response->status()]);
