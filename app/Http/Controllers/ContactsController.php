@@ -67,10 +67,10 @@ class ContactsController extends Controller
     {
         // Extract DebitPartyName from the callback data
         // Log::info($request);
-        // Log::error($request);
+        Log::error($request);
 
         if ($request->json('Result.ResultCode') != 0) {
-            // Log::info($request);
+            Log::info($request);
             return 'failed';
         }
         $debitPartyName = $request->json('Result.ResultParameters.ResultParameter.0.Value');
