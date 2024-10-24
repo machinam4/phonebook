@@ -67,10 +67,10 @@ class ContactsController extends Controller
     {
         // Extract DebitPartyName from the callback data
         // Log::info($request);
-        Log::error($request);
+        // Log::error($request);
 
         if ($request->json('Result.ResultCode') != 0) {
-            Log::info($request);
+            // Log::info($request);
             return 'failed';
         }
         $debitPartyName = $request->json('Result.ResultParameters.ResultParameter.0.Value');
@@ -105,7 +105,7 @@ class ContactsController extends Controller
         
        
 
-        if ($BusinessShortCode == '3018585') {
+        if ($BusinessShortCode == '3018585' || $BusinessShortCode == '4140853') {
             $playerdata = ([
                 'MSISDN' => $phoneNumber,
                 'FirstName' => $firstname,
