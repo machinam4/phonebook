@@ -107,7 +107,7 @@ class PaybillsController extends Controller
         // Access the response body as an array
         $responseArray = $response->json();
 
-        // Log::info($responseArray);
+        Log::info($responseArray);
 
 
 
